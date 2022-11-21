@@ -2,11 +2,14 @@
 import { useActive, useSetActive } from "../../context/ToggleContext";
 import { useShow, useSetShow } from "../../context/LoginToggleContext";
 import "../../App.css";
+import { useSetUser, useUser } from "../../context/UserContext";
 
 function Navbar() {
 	const active = useActive();
 	const setActive = useSetActive();
 	const show = useShow();
+	const user = useUser();
+	const setUser = useSetUser();
 
 	const setShow = useSetShow();
 	return (
@@ -70,24 +73,37 @@ function Navbar() {
 
 				<div className="navbar-end">
 					<div className="navbar-item">
-						<div className="buttons">
-							<button
-								onClick={() => {
-									setActive(!active);
-								}}
-								className="button is-primary"
-							>
-								Signup
-							</button>
-							<button
-								onClick={() => {
-									setShow(!show);
-								}}
-								className="button is-light"
-							>
-								Log in
-							</button>
-						</div>
+						{!user ? (
+							<div className="buttons">
+								<button
+									onClick={() => {
+										setActive(!active);
+									}}
+									className="button is-primary"
+								>
+									Signup
+								</button>
+								<button
+									onClick={() => {
+										setShow(!show);
+									}}
+									className="button is-light"
+								>
+									Log in
+								</button>
+							</div>
+						) : (
+							<div className="buttons">
+								<button
+									onClick={() => {
+										setUser("");
+									}}
+									className="button is-primary"
+								>
+									LogOut
+								</button>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

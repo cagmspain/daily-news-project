@@ -1,4 +1,22 @@
+import { deleteNewService } from "../../services";
+import { useContext, useState } from "react";
+import { useUser } from "../../context/UserContext";
+
 export const NewElement = ({ newElement }) => {
+	const user = useUser();
+
+	const [error, setError] = useState("");
+	const token = user;
+	const id = newElement.id;
+
+	const deleteNew = async () => {
+		try {
+			await deleteNewService({ id, token });
+		} catch (error) {
+			setError(error.message);
+		}
+		console.log(newElement.id, token);
+	};
 	return (
 		<div>
 			<p></p>
@@ -12,7 +30,7 @@ export const NewElement = ({ newElement }) => {
 					</div>
 					<footer className="card-footer">
 						<button className="card-footer-item button is-light is-info">
-							<div>
+							<div onClick={() => deleteNew(newElement.id, token)}>
 								<i className="fa-solid fa-trash"></i>
 							</div>
 						</button>

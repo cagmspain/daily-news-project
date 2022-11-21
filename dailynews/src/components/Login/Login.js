@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSetUser, useUser } from "../../context/UserContext";
 
 function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
 
 	const user = useUser();
 	const setUser = useSetUser();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		const res = await fetch("http://localhost:3000/login", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -21,14 +23,14 @@ function Login() {
 		});
 		const data = await res.json();
 		if (!res.ok) {
-			// TODO: Manejar error
+			setError(error.message);
+			alert("usuario o contraseña invalidos");
 		} else {
 			setUser(data);
 		}
 	};
 
 	if (user) {
-		//return <Navigate to="/" />;
 	}
 
 	return (
@@ -52,6 +54,7 @@ function Login() {
 					/>
 				</label>
 				<button>Entrar</button>
+				{error ? <p>{error}</p> : null}
 			</form>
 			<p>
 				Todavía no tienes cuenta? <Link to="/signup">Regístrate</Link>
