@@ -2,7 +2,7 @@ import { useActive, useSetActive } from "../../context/ToggleContext";
 
 import "./Modal.css";
 
-function ModalLogin({ children, label = "Registrate" }) {
+function ModalLogin({ children }) {
 	const active = useActive();
 	const setActive = useSetActive();
 

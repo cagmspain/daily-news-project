@@ -36,3 +36,18 @@ export const deleteNewService = async ({ id, token }) => {
 	}
 	return json;
 };
+
+export const editNewService = async ({ id, data, token }) => {
+	const response = await fetch(`http://127.0.0.1:3000/news/${id}`, {
+		method: "PUT",
+		body: data,
+		headers: {
+			Authorization: token,
+		},
+	});
+	const json = await response.json();
+	if (!response.ok) {
+		throw new Error(json.message);
+	}
+	return json;
+};

@@ -1,28 +1,31 @@
-import { useShow, useSetShow } from "../../context/LoginToggleContext";
+import {
+	useEditMode,
+	useSetEditMode,
+} from "../../context/EditNewToggleContext";
 import "./Modal.css";
 
-function Modal({ children }) {
-	const show = useShow();
-	const setShow = useSetShow();
+function ModalEditNew({ children }) {
+	const editMode = useEditMode();
+	const setEditMode = useSetEditMode();
 
 	return (
 		<>
-			{show && (
+			{editMode && (
 				<div className="modal is-active">
 					<div
 						onClick={(e) => {
 							e.stopPropagation();
-							setShow(false);
+							setEditMode(false);
 						}}
 						className="modal-background"
 					></div>
 					<div className="modal-card">
 						<header className="modal-card-head">
-							<p className="modal-card-title">Inicia sesion</p>
+							<p className="modal-card-title">Edit new</p>
 							<button
 								className="delete"
 								aria-label="close"
-								onClick={() => setShow(false)}
+								onClick={() => setEditMode(false)}
 							></button>
 						</header>
 						<section className="modal-card-body">{children}</section>
@@ -33,4 +36,4 @@ function Modal({ children }) {
 	);
 }
 
-export default Modal;
+export default ModalEditNew;

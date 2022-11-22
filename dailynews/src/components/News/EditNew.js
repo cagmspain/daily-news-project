@@ -1,21 +1,28 @@
 import { useState } from "react";
 import { useUser } from "../../context/UserContext";
-import { sendNewsService } from "../../services";
+import { editNewService } from "../../services";
 
-const CreateNew = () => {
+const EditNew = ({ newElement }) => {
 	const [error, setError] = useState("");
 	const [sending, setSending] = useState(false);
-	const user = useUser();
-	const token = user.data.token;
+	const [leadIn, setLeadIn] = useState(newElement.leadIn);
+	const [newsText, setNewsText] = useState(newElement.newsText);
+	const [topic, setTopic] = useState(newElement.topic);
+
+	//const id = user.data.id;
+	const newId = newElement.id;
+	console.log("este es el id a editar", newId);
+	console.log("esto recibo", newElement);
 
 	const handleForm = async (e) => {
 		e.preventDefault();
+		e.stopPropagation();
 		try {
 			setSending(true);
 			const data = new FormData(e.target);
 
-			const newNew = await sendNewsService({ data, token });
-			//console.log("esta es la noticia", newNew);
+			const editedNew = await editNewService({ newId, data });
+			console.log(newId, data);
 		} catch (error) {
 			setError(error.message);
 		} finally {
@@ -38,6 +45,10 @@ const CreateNew = () => {
 							type="text"
 							placeholder="leadIn"
 							required
+							onChange={(e) => {
+								setLeadIn(e.target.value);
+							}}
+							value={leadIn}
 						/>
 					</div>
 				</fieldset>
@@ -50,6 +61,10 @@ const CreateNew = () => {
 						name="newsText"
 						className="textarea"
 						placeholder="Escribe una noticia"
+						onChange={(e) => {
+							setNewsText(e.target.value);
+						}}
+						value={newsText}
 					></textarea>
 				</fieldset>
 				<fieldset className="field">
@@ -63,18 +78,22 @@ const CreateNew = () => {
 							className="input"
 							type="text"
 							placeholder="topic"
+							onChange={(e) => {
+								setTopic(e.target.value);
+							}}
+							value={topic}
 						/>
 					</div>
 				</fieldset>
 				<div className="control">
 					<button type="submit" className="mt-2 button is-info">
-						Create!
+						Edit!
 					</button>
 				</div>
-				{sending ? <p>Sending New</p> : null}
+				{sending ? <p>Editing New</p> : null}
 				{error ? <p>{error}</p> : null}
 			</form>
 		</div>
 	);
 };
-export default CreateNew;
+export default EditNew;

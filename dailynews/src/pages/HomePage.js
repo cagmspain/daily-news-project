@@ -4,15 +4,18 @@ import ModalLogin from "../components/Modal/ModalLogin";
 import ButtonAddNews from "../components/News/ButtonAddNews";
 import { NewsList } from "../components/News/NewsList";
 import { useSetUser, useUser } from "../context/UserContext";
-
+import { useSetShow, useShow } from "../context/LoginToggleContext";
 import Signup from "../components/Signup/Signup";
 import useNews from "../hooks/useNews";
 import CreateNew from "../components/News/CreateNew";
+import { useState } from "react";
 
 const HomePage = () => {
 	const { news, loading, error } = useNews();
 	const user = useUser();
-	console.log(user);
+	const show = useShow();
+	const setShow = useSetShow();
+	//console.log("esto es user", user);
 
 	if (loading) {
 		return <p>Cargando noticias...</p>;
@@ -20,13 +23,19 @@ const HomePage = () => {
 	if (error) {
 		return <p>{error}</p>;
 	}
-	console.log(news.data);
+	//console.log(news.data);
 	return (
 		<section>
-			{user ? <CreateNew /> : null}
-			<ButtonAddNews />
+			{user ? (
+				<>
+					<ButtonAddNews />
+
+					<CreateNew />
+				</>
+			) : null}
 
 			<NewsList news={news.data} />
+
 			<ModalLogin>
 				<Signup />
 			</ModalLogin>
