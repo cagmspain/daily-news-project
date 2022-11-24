@@ -24,52 +24,21 @@ function Navbar() {
 					/>
 				</a>
 
-				<a
+				<div
 					role="button"
 					className="navbar-burger"
 					aria-label="menu"
 					aria-expanded="false"
 					data-target="navbarBasicExample"
-					href="/"
 				>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
-				</a>
+				</div>
 			</div>
 
 			<div id="navbarBasicExample" className="navbar-menu">
-				<div className="navbar-start">
-					<a className="navbar-item" href="/">
-						Home
-					</a>
-
-					<a className="navbar-item" href="/">
-						Documentation
-					</a>
-
-					<div className="navbar-item has-dropdown is-hoverable">
-						<a className="navbar-link" href="/">
-							More
-						</a>
-
-						<div className="navbar-dropdown">
-							<a className="navbar-item" href="/">
-								About
-							</a>
-							<a className="navbar-item" href="/">
-								Jobs
-							</a>
-							<a className="navbar-item" href="/">
-								Contact
-							</a>
-							<hr className="navbar-divider" />
-							<a className="navbar-item" href="/">
-								Report an issue
-							</a>
-						</div>
-					</div>
-				</div>
+				<div className="navbar-start"></div>
 
 				<div className="navbar-end">
 					<div className="navbar-item">
@@ -96,7 +65,7 @@ function Navbar() {
 							<div className="buttons">
 								<button
 									onClick={() => {
-										setUser("");
+										setUser(null);
 									}}
 									className="button is-primary"
 								>

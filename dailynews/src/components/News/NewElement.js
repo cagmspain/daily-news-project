@@ -1,20 +1,20 @@
-import { deleteNewService } from "../../services";
+import { deleteNewService, voteNewService } from "../../services";
 import { useContext, useState } from "react";
 import { useUser } from "../../context/UserContext";
-import {
-	useEditMode,
-	useSetEditMode,
-} from "../../context/EditNewToggleContext";
+
 import EditNew from "./EditNew";
 import ModalEditNew from "../../components/Modal/ModalEditNew";
 
 export const NewElement = ({ newElement }) => {
 	const user = useUser();
-	const editMode = useEditMode();
-	const setEditMode = useSetEditMode();
+
+	//const setEditMode = useSetEditMode();
 	const [error, setError] = useState("");
+	const [view, setView] = useState(false);
+
 	const token = user?.data.token;
 	const id = newElement.id;
+	let vote;
 
 	const deleteNew = async () => {
 		try {
@@ -22,7 +22,15 @@ export const NewElement = ({ newElement }) => {
 		} catch (error) {
 			setError(error.message);
 		}
-		console.log(newElement.id, token);
+		//console.log(newElement.id, token);
+	};
+	const voteNew = async () => {
+		try {
+			await voteNewService({ id, vote, token });
+		} catch (error) {
+			setError(error.message);
+		}
+		//console.log(newElement.id, token);
 	};
 	return (
 		<div>
@@ -39,7 +47,7 @@ export const NewElement = ({ newElement }) => {
 						{user && user.data.id === newElement.user_id ? (
 							<button
 								onClick={() => {
-									deleteNew(newElement.id, token);
+									deleteNew(id, token);
 								}}
 								className="card-footer-item button is-light is-info"
 							>
@@ -48,29 +56,45 @@ export const NewElement = ({ newElement }) => {
 								</div>
 							</button>
 						) : null}
-						<button className="card-footer-item button is-light is-info">
-							<div>
-								<i className="fa-solid fa-check"></i>
-							</div>
-						</button>
-						<button
-							onClick={(e) => {
-								e.stopPropagation();
-								console.log("editando", editMode, newElement.id);
-								setEditMode(!editMode);
-							}}
-							className="card-footer-item button is-light is-info"
-						>
-							<div>
-								<i className="fa-solid fa-pen-to-square"></i>
-							</div>
-						</button>
+						{user && user.data.id !== newElement.user_id ? (
+							<>
+								<button
+									onClick={() => {
+										vote = 1;
+										voteNew(id, vote, token);
+									}}
+									className="card-footer-item button is-light is-info"
+								>
+									<div>
+										<i className="fa-regular fa-heart"></i>
+									</div>
+								</button>
+								<button className="card-footer-item button is-light is-info">
+									<div>
+										<i className="fa-regular fa-thumbs-down"></i>
+									</div>
+								</button>
+							</>
+						) : null}
+						{user && user.data.id === newElement.user_id ? (
+							<button
+								onClick={(e) => {
+									e.stopPropagation();
+
+									setView(true);
+								}}
+								className="card-footer-item button is-light is-info"
+							>
+								<div>
+									<i className="fa-solid fa-pen-to-square"></i>
+								</div>
+							</button>
+						) : null}
 					</footer>
 				</div>
-				<ModalEditNew>
+				<ModalEditNew view={view} setView={setView}>
 					<EditNew newElement={newElement} />
 				</ModalEditNew>
-				;
 			</div>
 		</div>
 	);

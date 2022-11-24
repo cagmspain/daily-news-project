@@ -1,7 +1,7 @@
 import { NewElement } from "./NewElement";
 
 export const NewsList = ({ news }) => {
-	console.log("esto son las news", news);
+	//console.log("esto son las news", news);
 	return news ? (
 		<ul>
 			{news.map((newElement) => (

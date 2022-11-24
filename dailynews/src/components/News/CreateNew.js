@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useUser } from "../../context/UserContext";
 import { sendNewsService } from "../../services";
 
-const CreateNew = () => {
+const CreateNew = ({ showForm, setShowForm }) => {
 	const [error, setError] = useState("");
 	const [sending, setSending] = useState(false);
 	const user = useUser();
@@ -15,7 +15,7 @@ const CreateNew = () => {
 			const data = new FormData(e.target);
 
 			const newNew = await sendNewsService({ data, token });
-			//console.log("esta es la noticia", newNew);
+			setShowForm(!showForm);
 		} catch (error) {
 			setError(error.message);
 		} finally {

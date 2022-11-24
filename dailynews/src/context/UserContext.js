@@ -5,6 +5,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 	const [user, setUser] = useLocalStorage("session");
+
 	return (
 		<UserContext.Provider value={[user, setUser]}>
 			{children}

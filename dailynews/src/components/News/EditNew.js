@@ -8,21 +8,23 @@ const EditNew = ({ newElement }) => {
 	const [leadIn, setLeadIn] = useState(newElement.leadIn);
 	const [newsText, setNewsText] = useState(newElement.newsText);
 	const [topic, setTopic] = useState(newElement.topic);
-
+	const user = useUser();
+	const token = user?.data.token;
 	//const id = user.data.id;
-	const newId = newElement.id;
-	console.log("este es el id a editar", newId);
+	const id = newElement.id;
+	console.log("este es el id a editar", id);
 	console.log("esto recibo", newElement);
 
 	const handleForm = async (e) => {
 		e.preventDefault();
 		e.stopPropagation();
+
 		try {
 			setSending(true);
 			const data = new FormData(e.target);
 
-			const editedNew = await editNewService({ newId, data });
-			console.log(newId, data);
+			const editedNew = await editNewService({ id, data, token });
+			console.log(id, data, token);
 		} catch (error) {
 			setError(error.message);
 		} finally {

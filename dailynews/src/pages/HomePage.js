@@ -4,18 +4,18 @@ import ModalLogin from "../components/Modal/ModalLogin";
 import ButtonAddNews from "../components/News/ButtonAddNews";
 import { NewsList } from "../components/News/NewsList";
 import { useSetUser, useUser } from "../context/UserContext";
-import { useSetShow, useShow } from "../context/LoginToggleContext";
+
 import Signup from "../components/Signup/Signup";
 import useNews from "../hooks/useNews";
 import CreateNew from "../components/News/CreateNew";
 import { useState } from "react";
+import ModalCreateNew from "../components/Modal/ModalCreateNew";
 
 const HomePage = () => {
 	const { news, loading, error } = useNews();
 	const user = useUser();
-	const show = useShow();
-	const setShow = useSetShow();
-	//console.log("esto es user", user);
+
+	const [showForm, setShowForm] = useState(false);
 
 	if (loading) {
 		return <p>Cargando noticias...</p>;
@@ -23,14 +23,15 @@ const HomePage = () => {
 	if (error) {
 		return <p>{error}</p>;
 	}
-	//console.log(news.data);
+
 	return (
 		<section>
 			{user ? (
 				<>
-					<ButtonAddNews />
-
-					<CreateNew />
+					<ButtonAddNews showForm={showForm} setShowForm={setShowForm} />
+					<ModalCreateNew showForm={showForm} setShowForm={setShowForm}>
+						<CreateNew showForm={showForm} setShowForm={setShowForm} />
+					</ModalCreateNew>
 				</>
 			) : null}
 

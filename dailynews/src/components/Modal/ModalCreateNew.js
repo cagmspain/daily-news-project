@@ -1,24 +1,21 @@
 import "./Modal.css";
 
-function ModalEditNew({ view, setView, children }) {
+function ModalCreateNew({ showForm, setShowForm, children }) {
 	return (
 		<>
-			{view && (
+			{showForm && (
 				<div className="modal is-active">
 					<div
-						onClick={(e) => {
-							e.stopPropagation();
-							setView(false);
-						}}
+						onClick={() => setShowForm(!showForm)}
 						className="modal-background"
 					></div>
 					<div className="modal-card">
 						<header className="modal-card-head">
-							<p className="modal-card-title">Edit new</p>
+							<p className="modal-card-title">Registrate</p>
 							<button
 								className="delete"
 								aria-label="close"
-								onClick={() => setView(false)}
+								onClick={() => setShowForm(!showForm)}
 							></button>
 						</header>
 						<section className="modal-card-body">{children}</section>
@@ -29,4 +26,4 @@ function ModalEditNew({ view, setView, children }) {
 	);
 }
 
-export default ModalEditNew;
+export default ModalCreateNew;

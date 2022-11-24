@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSetShow, useShow } from "../../context/LoginToggleContext";
 import { useSetUser, useUser } from "../../context/UserContext";
 
 function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
-
+	const setShow = useSetShow();
+	const show = useShow();
 	const user = useUser();
 	const setUser = useSetUser();
 
@@ -27,6 +29,7 @@ function Login() {
 			alert("usuario o contraseña invalidos");
 		} else {
 			setUser(data);
+			setShow(!show);
 		}
 	};
 
@@ -53,7 +56,9 @@ function Login() {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</label>
+
 				<button>Entrar</button>
+
 				{error ? <p>{error}</p> : null}
 			</form>
 			<p>
