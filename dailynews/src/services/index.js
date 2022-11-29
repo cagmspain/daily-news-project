@@ -1,11 +1,11 @@
 export const getAllNewsService = async () => {
 	const response = await fetch("http://127.0.0.1:3000/news");
-	const json = response.json();
+	const json = await response.json();
 	if (!response.ok) {
 		throw new Error(json.message);
 	}
 
-	return json;
+	return json.data;
 };
 
 export const sendNewsService = async ({ data, token }) => {
@@ -20,7 +20,8 @@ export const sendNewsService = async ({ data, token }) => {
 	if (!response.ok) {
 		throw new Error(json.message);
 	}
-	return json;
+
+	return json.data;
 };
 
 export const deleteNewService = async ({ id, token }) => {

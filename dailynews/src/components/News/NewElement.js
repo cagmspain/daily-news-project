@@ -1,24 +1,26 @@
 import { deleteNewService, voteNewService } from "../../services";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useUser } from "../../context/UserContext";
 
 import EditNew from "./EditNew";
 import ModalEditNew from "../../components/Modal/ModalEditNew";
 
-export const NewElement = ({ newElement }) => {
+export const NewElement = ({ newElement, deleteNewElement }) => {
 	const user = useUser();
 
 	//const setEditMode = useSetEditMode();
 	const [error, setError] = useState("");
 	const [view, setView] = useState(false);
+	const [voted, setVoted] = useState(false);
 
 	const token = user?.data.token;
 	const id = newElement.id;
 	let vote;
 
-	const deleteNew = async () => {
+	const deleteNew = async (id) => {
 		try {
 			await deleteNewService({ id, token });
+			deleteNewElement(id);
 		} catch (error) {
 			setError(error.message);
 		}
@@ -62,16 +64,32 @@ export const NewElement = ({ newElement }) => {
 									onClick={() => {
 										vote = 1;
 										voteNew(id, vote, token);
+										setVoted(true);
+									}}
+									className="card-footer-item button is-light is-info"
+								>
+									{voted ? (
+										<div>
+											<i className="fa-solid fa-heart"></i>
+											{newElement.votesPositives}
+										</div>
+									) : (
+										<div>
+											<i className="fa-regular fa-heart"></i>
+											{newElement.votesPositives}
+										</div>
+									)}
+								</button>
+								<button
+									onClick={() => {
+										vote = -1;
+										voteNew(id, vote, token);
 									}}
 									className="card-footer-item button is-light is-info"
 								>
 									<div>
-										<i className="fa-regular fa-heart"></i>
-									</div>
-								</button>
-								<button className="card-footer-item button is-light is-info">
-									<div>
 										<i className="fa-regular fa-thumbs-down"></i>
+										{newElement.votesNegatives}
 									</div>
 								</button>
 							</>

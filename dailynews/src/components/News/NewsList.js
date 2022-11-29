@@ -1,13 +1,16 @@
 import { NewElement } from "./NewElement";
 
-export const NewsList = ({ news }) => {
-	//console.log("esto son las news", news);
+export const NewsList = ({ news, deleteNewElement }) => {
+	console.log("esto son las news", news);
 	return news ? (
 		<ul>
 			{news.map((newElement) => (
 				<li key={newElement.id}>
 					<div className="section">
-						<NewElement newElement={newElement} />
+						<NewElement
+							newElement={newElement}
+							deleteNewElement={deleteNewElement}
+						/>
 					</div>
 				</li>
 			))}
