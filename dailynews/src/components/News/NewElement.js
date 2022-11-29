@@ -9,16 +9,17 @@ export const NewElement = ({
 	newElement,
 	deleteNewElement,
 	EditNewElement,
+	voteNewElement,
 }) => {
 	const user = useUser();
 
 	//const setEditMode = useSetEditMode();
 	const [error, setError] = useState("");
 	const [view, setView] = useState(false);
-	const [voted, setVoted] = useState(false);
 
 	const token = user?.data.token;
 	const id = newElement.id;
+	let voted = false;
 	let vote;
 
 	const deleteNew = async (id) => {
@@ -33,6 +34,7 @@ export const NewElement = ({
 	const voteNew = async () => {
 		try {
 			await voteNewService({ id, vote, token });
+			voteNewElement(id, vote);
 		} catch (error) {
 			setError(error.message);
 		}
@@ -67,8 +69,9 @@ export const NewElement = ({
 								<button
 									onClick={() => {
 										vote = 1;
+										console.log("voto=", vote);
 										voteNew(id, vote, token);
-										setVoted(true);
+										//voteNewElement(id, vote);
 									}}
 									className="card-footer-item button is-light is-info"
 								>

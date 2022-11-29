@@ -30,11 +30,12 @@ const useNews = () => {
 
 	//delete from state after succesfull request
 	const deleteNewElement = (id) => {
-		//console.log(news);
+		console.log(news);
 		setNews(news.filter((NewElement) => NewElement.id !== id));
 	};
-	const EditNewElement = (id, data, user_id) => {
-		console.log("editando live");
+
+	//edit from state after successfull fetch request
+	const EditNewElement = (id, data) => {
 		setNews(
 			news.map((newElement) => {
 				if (newElement.id === id) {
@@ -45,10 +46,30 @@ const useNews = () => {
 			})
 		);
 	};
-	//const mapTask = this.tasks.map((elem) => {
-	// 	elem.id === id;
-	// 	return (elem = task);
-	// });
+	//add vote to state after succesfull request
+	const voteNewElement = (id, vote) => {
+		setNews(
+			news.map((newElement) => {
+				if (newElement.id === id) {
+					if (vote === 1) {
+						const noticias = newElement;
+						//console.log(noticias);
+						noticias.votesPositives = Number(newElement.votesPositives) + 1;
+						//console.log("noticias positivas", noticias);
+						return noticias;
+					} else {
+						const noticias = newElement;
+						//console.log(noticias);
+						noticias.votesNegatives = Number(newElement.votesNegatives) + 1;
+						//console.log("noticias negativas", noticias);
+						return noticias;
+					}
+				} else {
+					return newElement;
+				}
+			})
+		);
+	};
 
 	return {
 		news,
@@ -57,6 +78,7 @@ const useNews = () => {
 		addNewElement,
 		deleteNewElement,
 		EditNewElement,
+		voteNewElement,
 	};
 };
 export default useNews;

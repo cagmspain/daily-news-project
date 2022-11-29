@@ -19,6 +19,7 @@ const HomePage = () => {
 		addNewElement,
 		deleteNewElement,
 		EditNewElement,
+		voteNewElement,
 	} = useNews();
 	const user = useUser();
 
@@ -50,6 +51,7 @@ const HomePage = () => {
 				news={news}
 				deleteNewElement={deleteNewElement}
 				EditNewElement={EditNewElement}
+				voteNewElement={voteNewElement}
 			/>
 
 			<ModalLogin>

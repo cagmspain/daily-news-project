@@ -1,6 +1,11 @@
 import { NewElement } from "./NewElement";
 
-export const NewsList = ({ news, deleteNewElement, EditNewElement }) => {
+export const NewsList = ({
+	news,
+	deleteNewElement,
+	EditNewElement,
+	voteNewElement,
+}) => {
 	//console.log("esto son las news", news);
 	return news ? (
 		<ul>
@@ -11,6 +16,7 @@ export const NewsList = ({ news, deleteNewElement, EditNewElement }) => {
 							newElement={newElement}
 							deleteNewElement={deleteNewElement}
 							EditNewElement={EditNewElement}
+							voteNewElement={voteNewElement}
 						/>
 					</div>
 				</li>
