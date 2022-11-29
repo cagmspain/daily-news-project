@@ -47,6 +47,7 @@ export const editNewService = async ({ id, data, token }) => {
 		},
 	});
 	const json = await response.json();
+
 	if (!response.ok) {
 		throw new Error(json.message);
 	}

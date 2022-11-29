@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NewElement } from "../components/News/NewElement";
 import { getAllNewsService } from "../services";
 
 const useNews = () => {
@@ -32,7 +33,30 @@ const useNews = () => {
 		//console.log(news);
 		setNews(news.filter((NewElement) => NewElement.id !== id));
 	};
+	const EditNewElement = (id, data, user_id) => {
+		console.log("editando live");
+		setNews(
+			news.map((newElement) => {
+				if (newElement.id === id) {
+					return (newElement = data);
+				} else {
+					return newElement;
+				}
+			})
+		);
+	};
+	//const mapTask = this.tasks.map((elem) => {
+	// 	elem.id === id;
+	// 	return (elem = task);
+	// });
 
-	return { news, loading, error, addNewElement, deleteNewElement };
+	return {
+		news,
+		loading,
+		error,
+		addNewElement,
+		deleteNewElement,
+		EditNewElement,
+	};
 };
 export default useNews;

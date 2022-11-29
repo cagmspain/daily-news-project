@@ -1,7 +1,7 @@
 import { NewElement } from "./NewElement";
 
-export const NewsList = ({ news, deleteNewElement }) => {
-	console.log("esto son las news", news);
+export const NewsList = ({ news, deleteNewElement, EditNewElement }) => {
+	//console.log("esto son las news", news);
 	return news ? (
 		<ul>
 			{news.map((newElement) => (
@@ -10,6 +10,7 @@ export const NewsList = ({ news, deleteNewElement }) => {
 						<NewElement
 							newElement={newElement}
 							deleteNewElement={deleteNewElement}
+							EditNewElement={EditNewElement}
 						/>
 					</div>
 				</li>

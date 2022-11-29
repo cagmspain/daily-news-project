@@ -12,7 +12,14 @@ import { useState } from "react";
 import ModalCreateNew from "../components/Modal/ModalCreateNew";
 
 const HomePage = () => {
-	const { news, loading, error, addNewElement, deleteNewElement } = useNews();
+	const {
+		news,
+		loading,
+		error,
+		addNewElement,
+		deleteNewElement,
+		EditNewElement,
+	} = useNews();
 	const user = useUser();
 
 	const [showForm, setShowForm] = useState(false);
@@ -39,7 +46,11 @@ const HomePage = () => {
 				</>
 			) : null}
 
-			<NewsList news={news} deleteNewElement={deleteNewElement} />
+			<NewsList
+				news={news}
+				deleteNewElement={deleteNewElement}
+				EditNewElement={EditNewElement}
+			/>
 
 			<ModalLogin>
 				<Signup />

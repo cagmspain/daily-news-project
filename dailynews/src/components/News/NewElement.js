@@ -5,7 +5,11 @@ import { useUser } from "../../context/UserContext";
 import EditNew from "./EditNew";
 import ModalEditNew from "../../components/Modal/ModalEditNew";
 
-export const NewElement = ({ newElement, deleteNewElement }) => {
+export const NewElement = ({
+	newElement,
+	deleteNewElement,
+	EditNewElement,
+}) => {
 	const user = useUser();
 
 	//const setEditMode = useSetEditMode();
@@ -111,7 +115,11 @@ export const NewElement = ({ newElement, deleteNewElement }) => {
 					</footer>
 				</div>
 				<ModalEditNew view={view} setView={setView}>
-					<EditNew newElement={newElement} />
+					<EditNew
+						newElement={newElement}
+						EditNewElement={EditNewElement}
+						setView={setView}
+					/>
 				</ModalEditNew>
 			</div>
 		</div>

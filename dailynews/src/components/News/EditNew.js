@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useUser } from "../../context/UserContext";
 import { editNewService } from "../../services";
 
-const EditNew = ({ newElement }) => {
+const EditNew = ({ newElement, EditNewElement, setView }) => {
 	const [error, setError] = useState("");
 	const [sending, setSending] = useState(false);
 	const [leadIn, setLeadIn] = useState(newElement.leadIn);
@@ -10,10 +10,11 @@ const EditNew = ({ newElement }) => {
 	const [topic, setTopic] = useState(newElement.topic);
 	const user = useUser();
 	const token = user?.data.token;
-	//const id = user.data.id;
+	const user_id = user.data.id;
+	const propiedad = { user_id: user_id };
 	const id = newElement.id;
-	console.log("este es el id a editar", id);
-	console.log("esto recibo", newElement);
+	//console.log("este es el id a editar", id);
+	//console.log("esto recibo", newElement);
 
 	const handleForm = async (e) => {
 		e.preventDefault();
@@ -24,7 +25,14 @@ const EditNew = ({ newElement }) => {
 			const data = new FormData(e.target);
 
 			const editedNew = await editNewService({ id, data, token });
-			console.log(id, data, token);
+			const noticiaEditada = editedNew.data;
+			//adding property user_id to editedNew
+			noticiaEditada.user_id = propiedad.user_id;
+
+			EditNewElement(id, noticiaEditada);
+			setView(false);
+
+			//console.log(id, data, token);
 		} catch (error) {
 			setError(error.message);
 		} finally {
