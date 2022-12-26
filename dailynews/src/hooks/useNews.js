@@ -6,12 +6,13 @@ const useNews = () => {
 	const [news, setNews] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
+	const [topic, setTopic] = useState("");
 
 	useEffect(() => {
 		const loadNews = async () => {
 			try {
 				setLoading(true);
-				const data = await getAllNewsService();
+				const data = await getAllNewsService(topic);
 				setNews(data);
 			} catch (error) {
 				setError(error.message);
@@ -20,7 +21,7 @@ const useNews = () => {
 			}
 		};
 		loadNews();
-	}, []);
+	}, [topic]);
 
 	//Add new in sgtate after succesfull request
 	const addNewElement = (data) => {
@@ -79,6 +80,8 @@ const useNews = () => {
 		deleteNewElement,
 		EditNewElement,
 		voteNewElement,
+		topic,
+		setTopic,
 	};
 };
 export default useNews;

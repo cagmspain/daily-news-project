@@ -1,5 +1,7 @@
-export const getAllNewsService = async () => {
-	const response = await fetch("http://127.0.0.1:3000/news");
+export const getAllNewsService = async (topic) => {
+	const response = await fetch(
+		`http://127.0.0.1:3000/news${topic ? "?topic=" + topic : ""}`
+	);
 	const json = await response.json();
 	if (!response.ok) {
 		throw new Error(json.message);

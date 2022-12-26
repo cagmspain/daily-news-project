@@ -6,8 +6,8 @@ export const NewsList = ({
 	EditNewElement,
 	voteNewElement,
 }) => {
-	console.log("esto son las news", news);
-	return news ? (
+	console.log(news);
+	return news.length !== 0 ? (
 		<ul>
 			{news.map((newElement) => (
 				<li key={newElement.id}>
@@ -22,6 +22,6 @@ export const NewsList = ({
 			))}
 		</ul>
 	) : (
-		<p>No hay noticias Empty state</p>
+		<p>No hay noticias</p>
 	);
 };

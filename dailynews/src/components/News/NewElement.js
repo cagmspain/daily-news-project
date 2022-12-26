@@ -36,7 +36,7 @@ export const NewElement = ({
 			const response = await voteNewService({ id, vote, token });
 			setVotePositive(response.data.positive);
 			setVoteNegative(response.data.negative);
-			//voteNewElement(id, vote);
+			setError("");
 		} catch (error) {
 			setError(error.message);
 		}
@@ -48,10 +48,17 @@ export const NewElement = ({
 			<div className="card">
 				<div className="card-flex">
 					<header className="card-header">
-						<p className="card-header-title">{newElement.leadIn}</p>
+						<p className="card-header-title">
+							{newElement.leadIn} - {newElement.topic}
+							{newElement.email ? ` (${newElement.email})` : null}
+						</p>
 					</header>
 					<div className="card-content">
-						<div className="content"> {newElement.newsText}</div>
+						<div className="content">
+							{" "}
+							{newElement.newsText}
+							<p>{error}</p>
+						</div>
 					</div>
 					<footer className="card-footer">
 						{user && user.data.id === newElement.user_id ? (

@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { useSetUser, useUser } from "../../context/UserContext";
+import { Link } from "react-router-dom";
 
 function Signup() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-
-	const user = useUser();
-	const setUser = useSetUser();
+	const [error, setError] = useState("");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -20,41 +17,58 @@ function Signup() {
 			}),
 		});
 		const data = await res.json();
+
 		if (!res.ok) {
-			// TODO: Manejar error
+			setError(data.message);
 		} else {
-			setUser(data);
+			setError(data.message);
 		}
 	};
-
-	if (user) {
-		//return <Navigate to="/" />;
-	}
 
 	return (
 		<main id="signup" className="modal-like">
 			<form onSubmit={handleSubmit}>
-				<label>
-					<span>Username</span>
-					<input
-						name="username"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-					/>
-				</label>
-				<label>
-					<span>Password</span>
-					<input
-						name="password"
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-				</label>
-				<button>Registro</button>
+				<div className="field">
+					<label className="label">
+						<span>Email or username</span>
+						<div className="control">
+							<input
+								className="input"
+								type="email"
+								placeholder="Email"
+								name="username"
+								value={username}
+								onChange={(e) => setUsername(e.target.value)}
+							/>
+						</div>
+					</label>
+				</div>
+				<div className="field">
+					<label className="label">
+						<span>Password</span>
+						<div className="control">
+							<input
+								className="input"
+								placeholder="Password"
+								name="password"
+								type="password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+						</div>
+					</label>
+				</div>
+				<p>{error}</p>
+				<div className="field">
+					<div className="control">
+						<button className="button is-link is-fullwidth" type="submit">
+							Registro
+						</button>
+					</div>
+				</div>
 			</form>
 			<p>
-				Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
+				Ya tienes cuenta? <Link to="/">Inicia sesión</Link>
 			</p>
 		</main>
 	);

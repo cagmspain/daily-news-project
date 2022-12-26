@@ -11,7 +11,7 @@ function ModalCreateNew({ showForm, setShowForm, children }) {
 					></div>
 					<div className="modal-card">
 						<header className="modal-card-head">
-							<p className="modal-card-title">Registrate</p>
+							<p className="modal-card-title">Create news</p>
 							<button
 								className="delete"
 								aria-label="close"

@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import { sendNewsService } from "../../services";
 
 const CreateNew = ({ showForm, setShowForm, addNewElement }) => {
+	const navigate = useNavigate();
 	const [error, setError] = useState("");
 	const [sending, setSending] = useState(false);
 	const user = useUser();
@@ -19,6 +21,7 @@ const CreateNew = ({ showForm, setShowForm, addNewElement }) => {
 			addNewElement(newNew);
 
 			setShowForm(!showForm);
+			navigate("/");
 		} catch (error) {
 			setError(error.message);
 		} finally {
@@ -62,8 +65,12 @@ const CreateNew = ({ showForm, setShowForm, addNewElement }) => {
 						</label>
 
 						<select id="topic" name="topic" className="input">
+							<option>Select Topic</option>
 							<option value="deporte">Deportes</option>
 							<option value="economia">Economia</option>
+							<option value="cultura">Cultura</option>
+							<option value="tecnologia">Tecnologia</option>
+							<option value="politica">Politica</option>
 						</select>
 					</div>
 				</fieldset>

@@ -38,19 +38,7 @@ function Navbar() {
 			</div>
 
 			<div id="navbarBasicExample" className="navbar-menu">
-				<div className="navbar-start">
-					<div className="navbar-item has-dropdown is-hoverable">
-						<a className="navbar-link"> Filter</a>
-
-						<div className="navbar-dropdown">
-							<a className="navbar-item">recent</a>
-							<a className="navbar-item">last</a>
-							<a className="navbar-item">relevant</a>
-
-							<a className="navbar-item">topic</a>
-						</div>
-					</div>
-				</div>
+				<div className="navbar-start"></div>
 
 				<div className="navbar-end">
 					<div className="navbar-item">
@@ -81,7 +69,7 @@ function Navbar() {
 									}}
 									className="button is-primary"
 								>
-									LogOut
+									Logout
 								</button>
 							</div>
 						)}
