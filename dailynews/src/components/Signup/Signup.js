@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useActive, useSetActive } from "../../context/ToggleContext";
+import { useShow, useSetShow } from "../../context/LoginToggleContext";
 
 function Signup() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
+
+	const active = useActive();
+	const setActive = useSetActive();
+	const show = useShow();
+	const setShow = useSetShow();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -67,9 +74,21 @@ function Signup() {
 					</div>
 				</div>
 			</form>
-			<p>
-				Ya tienes cuenta? <Link to="/">Inicia sesión</Link>
-			</p>
+			<p>Ya tienes cuenta?</p>
+			<div className="field">
+				<div className="control">
+					<button
+						className="button is-link is-fullwidth"
+						type="submit"
+						onClick={() => {
+							setActive(!active);
+							setShow(!show);
+						}}
+					>
+						Login
+					</button>
+				</div>
+			</div>
 		</main>
 	);
 }

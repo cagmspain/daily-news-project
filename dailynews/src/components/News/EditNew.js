@@ -97,7 +97,7 @@ const EditNew = ({ newElement, EditNewElement, setView }) => {
 				</fieldset>
 				<div className="control">
 					<button type="submit" className="mt-2 button is-info">
-						Edit!
+						Save!
 					</button>
 				</div>
 				{sending ? <p>Editing New</p> : null}

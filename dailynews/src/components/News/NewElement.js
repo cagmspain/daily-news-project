@@ -85,11 +85,13 @@ export const NewElement = ({
 									{voted ? (
 										<div>
 											<i className="fa-solid fa-heart"></i>
+											<span> </span>
 											{votePositive}
 										</div>
 									) : (
 										<div>
 											<i className="fa-regular fa-heart"></i>
+											<span> </span>
 											{votePositive}
 										</div>
 									)}
@@ -101,7 +103,8 @@ export const NewElement = ({
 									className="card-footer-item button is-light is-info"
 								>
 									<div>
-										<i className="fa-regular fa-thumbs-down"></i>
+										<i className="fa-regular fa-thumbs-down "></i>
+										<span> </span>
 										{voteNegative}
 									</div>
 								</button>

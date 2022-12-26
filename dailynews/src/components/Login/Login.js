@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSetShow, useShow } from "../../context/LoginToggleContext";
+import { useActive, useSetActive } from "../../context/ToggleContext";
 import { useSetUser, useUser } from "../../context/UserContext";
 
 function Login() {
@@ -9,6 +10,8 @@ function Login() {
 	const [error, setError] = useState("");
 	const setShow = useSetShow();
 	const show = useShow();
+	const active = useActive();
+	const setActive = useSetActive();
 	const user = useUser();
 	const setUser = useSetUser();
 
@@ -79,9 +82,21 @@ function Login() {
 
 				{error ? <p>{error}</p> : null}
 			</form>
-			<p>
-				Todavía no tienes cuenta? <Link to="/signup">Regístrate</Link>
-			</p>
+			<p>Todavía no tienes cuenta?</p>
+			<div className="field">
+				<div className="control">
+					<button
+						className="button is-link is-fullwidth"
+						type="submit"
+						onClick={() => {
+							setShow(!show);
+							setActive(!active);
+						}}
+					>
+						Registrate
+					</button>
+				</div>
+			</div>
 		</main>
 	);
 }
