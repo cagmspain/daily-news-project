@@ -39,25 +39,43 @@ function Login() {
 	return (
 		<main id="login" className="modal-like">
 			<form onSubmit={handleSubmit}>
-				<label>
-					<span>Username</span>
-					<input
-						name="username"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-					/>
-				</label>
-				<label>
-					<span>Password</span>
-					<input
-						name="password"
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-				</label>
-
-				<button>Entrar</button>
+				<div className="field">
+					<label className="label">
+						<span>Email or username </span>
+						<div className="control">
+							<input
+								name="username"
+								className="input"
+								type="email"
+								placeholder="email"
+								value={username}
+								onChange={(e) => setUsername(e.target.value)}
+							/>
+						</div>
+					</label>
+				</div>
+				<div className="field">
+					<label className="label">
+						<span>Password</span>
+						<div className="control">
+							<input
+								className="input"
+								placeholder="Password"
+								name="password"
+								type="password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+						</div>
+					</label>
+				</div>
+				<div className="field">
+					<div className="control">
+						<button className="button is-link is-fullwidth" type="submit">
+							Entrar
+						</button>
+					</div>
+				</div>
 
 				{error ? <p>{error}</p> : null}
 			</form>

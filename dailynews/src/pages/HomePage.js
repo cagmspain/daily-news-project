@@ -32,8 +32,25 @@ const HomePage = () => {
 		return <p>{error}</p>;
 	}
 
+	const handleForm = async (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<section>
+			<form onSubmit={handleForm}>
+				<label htmlFor="topic" className="label">
+					topic
+				</label>
+				<select id="topic" name="topic" className="input">
+					<option value="deporte">Deportes</option>
+					<option value="economia">Economia</option>
+				</select>
+				<button type="submit" className="mt-2 button is-info">
+					Find
+				</button>
+			</form>
+
 			{user ? (
 				<>
 					<ButtonAddNews showForm={showForm} setShowForm={setShowForm} />

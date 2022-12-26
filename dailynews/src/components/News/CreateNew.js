@@ -60,13 +60,11 @@ const CreateNew = ({ showForm, setShowForm, addNewElement }) => {
 						<label htmlFor="topic" className="label">
 							topic
 						</label>
-						<input
-							id="topic"
-							name="topic"
-							className="input"
-							type="text"
-							placeholder="topic"
-						/>
+
+						<select id="topic" name="topic" className="input">
+							<option value="deporte">Deportes</option>
+							<option value="economia">Economia</option>
+						</select>
 					</div>
 				</fieldset>
 				<div className="control">

@@ -17,10 +17,10 @@ function Navbar() {
 			<div className="navbar-brand">
 				<a className="navbar-item" href="https://bulma.io">
 					<img
-						src="https://bulma.io/images/bulma-logo.png"
-						width="112"
+						src="https://ndiscopis.engageable.net/uploads/ndiscopis/ndiscopis-logo.png"
+						width="60"
 						height="28"
-						alt=""
+						alt="logo daily news"
 					/>
 				</a>
 
@@ -38,7 +38,19 @@ function Navbar() {
 			</div>
 
 			<div id="navbarBasicExample" className="navbar-menu">
-				<div className="navbar-start"></div>
+				<div className="navbar-start">
+					<div className="navbar-item has-dropdown is-hoverable">
+						<a className="navbar-link"> Filter</a>
+
+						<div className="navbar-dropdown">
+							<a className="navbar-item">recent</a>
+							<a className="navbar-item">last</a>
+							<a className="navbar-item">relevant</a>
+
+							<a className="navbar-item">topic</a>
+						</div>
+					</div>
+				</div>
 
 				<div className="navbar-end">
 					<div className="navbar-item">

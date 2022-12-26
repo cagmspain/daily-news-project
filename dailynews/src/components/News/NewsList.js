@@ -6,7 +6,7 @@ export const NewsList = ({
 	EditNewElement,
 	voteNewElement,
 }) => {
-	//console.log("esto son las news", news);
+	console.log("esto son las news", news);
 	return news ? (
 		<ul>
 			{news.map((newElement) => (
@@ -16,7 +16,6 @@ export const NewsList = ({
 							newElement={newElement}
 							deleteNewElement={deleteNewElement}
 							EditNewElement={EditNewElement}
-							voteNewElement={voteNewElement}
 						/>
 					</div>
 				</li>

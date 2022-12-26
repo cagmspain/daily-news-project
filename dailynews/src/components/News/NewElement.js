@@ -9,18 +9,18 @@ export const NewElement = ({
 	newElement,
 	deleteNewElement,
 	EditNewElement,
-	voteNewElement,
 }) => {
 	const user = useUser();
 
 	//const setEditMode = useSetEditMode();
 	const [error, setError] = useState("");
 	const [view, setView] = useState(false);
+	const [votePositive, setVotePositive] = useState(newElement.votesPositives);
+	const [voteNegative, setVoteNegative] = useState(newElement.votesNegatives);
 
 	const token = user?.data.token;
 	const id = newElement.id;
 	let voted = false;
-	let vote;
 
 	const deleteNew = async (id) => {
 		try {
@@ -31,10 +31,12 @@ export const NewElement = ({
 		}
 		//console.log(newElement.id, token);
 	};
-	const voteNew = async () => {
+	const voteNew = async (id, vote, token) => {
 		try {
-			await voteNewService({ id, vote, token });
-			voteNewElement(id, vote);
+			const response = await voteNewService({ id, vote, token });
+			setVotePositive(response.data.positive);
+			setVoteNegative(response.data.negative);
+			//voteNewElement(id, vote);
 		} catch (error) {
 			setError(error.message);
 		}
@@ -68,9 +70,7 @@ export const NewElement = ({
 							<>
 								<button
 									onClick={() => {
-										vote = 1;
-										console.log("voto=", vote);
-										voteNew(id, vote, token);
+										voteNew(id, 1, token);
 										//voteNewElement(id, vote);
 									}}
 									className="card-footer-item button is-light is-info"
@@ -78,25 +78,24 @@ export const NewElement = ({
 									{voted ? (
 										<div>
 											<i className="fa-solid fa-heart"></i>
-											{newElement.votesPositives}
+											{votePositive}
 										</div>
 									) : (
 										<div>
 											<i className="fa-regular fa-heart"></i>
-											{newElement.votesPositives}
+											{votePositive}
 										</div>
 									)}
 								</button>
 								<button
 									onClick={() => {
-										vote = -1;
-										voteNew(id, vote, token);
+										voteNew(id, -1, token);
 									}}
 									className="card-footer-item button is-light is-info"
 								>
 									<div>
 										<i className="fa-regular fa-thumbs-down"></i>
-										{newElement.votesNegatives}
+										{voteNegative}
 									</div>
 								</button>
 							</>
