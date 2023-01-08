@@ -3,6 +3,7 @@ import { useActive, useSetActive } from "../../context/ToggleContext";
 import { useShow, useSetShow } from "../../context/LoginToggleContext";
 import "../../App.css";
 import { useSetUser, useUser } from "../../context/UserContext";
+import { Link } from "react-router-dom";
 
 function Navbar() {
 	const active = useActive();
@@ -15,14 +16,15 @@ function Navbar() {
 	return (
 		<nav className="navbar" role="navigation" aria-label="main navigation">
 			<div className="navbar-brand">
-				<a className="navbar-item" href="https://bulma.io">
+				<Link to="/" className="navbar-item">
 					<img
-						src="https://ndiscopis.engageable.net/uploads/ndiscopis/ndiscopis-logo.png"
+						src="../../../public/mydn.png"
 						width="60"
 						height="28"
 						alt="logo daily news"
 					/>
-				</a>
+					<h1 className="title is-4">Quicknewby</h1>
+				</Link>
 
 				<div
 					role="button"

@@ -84,13 +84,13 @@ export const NewElement = ({
 								>
 									{voted ? (
 										<div>
-											<i className="fa-solid fa-heart"></i>
+											<i className="fa-solid fa-heart "> </i>
 											<span> </span>
 											{votePositive}
 										</div>
 									) : (
 										<div>
-											<i className="fa-regular fa-heart"></i>
+											<i className="fa-regular fa-thumbs-up "></i>
 											<span> </span>
 											{votePositive}
 										</div>

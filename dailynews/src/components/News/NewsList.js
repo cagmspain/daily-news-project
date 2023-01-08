@@ -6,7 +6,7 @@ export const NewsList = ({
 	EditNewElement,
 	voteNewElement,
 }) => {
-	console.log(news);
+	//console.log(news);
 	return news.length !== 0 ? (
 		<ul>
 			{news.map((newElement) => (
