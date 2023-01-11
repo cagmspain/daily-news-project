@@ -7,7 +7,7 @@ const EditNew = ({ newElement, EditNewElement, setView }) => {
 	const [sending, setSending] = useState(false);
 	const [leadIn, setLeadIn] = useState(newElement.leadIn);
 	const [newsText, setNewsText] = useState(newElement.newsText);
-	const [topic, setTopic] = useState(newElement.topic);
+	const [topic] = useState(newElement.topic);
 	const user = useUser();
 	const token = user?.data.token;
 	const user_id = user.data.id;
@@ -80,17 +80,15 @@ const EditNew = ({ newElement, EditNewElement, setView }) => {
 				<fieldset className="field">
 					<div className="control">
 						<label htmlFor="topic" className="label">
-							topic
+							Topic
 						</label>
 						<input
 							id="topic"
 							name="topic"
 							className="input"
+							readOnly
 							type="text"
 							placeholder="topic"
-							onChange={(e) => {
-								setTopic(e.target.value);
-							}}
 							value={topic}
 						/>
 					</div>

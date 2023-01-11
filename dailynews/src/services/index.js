@@ -56,8 +56,6 @@ export const editNewService = async ({ id, data, token }) => {
 	return json;
 };
 export const voteNewService = async ({ id, vote, token }) => {
-	console.log("votando");
-	console.log("voto recibido", vote);
 	const response = await fetch(`http://127.0.0.1:3000/news/${id}/votes`, {
 		method: "POST",
 		body: JSON.stringify({ vote }),

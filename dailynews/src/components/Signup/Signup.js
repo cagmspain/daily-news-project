@@ -18,7 +18,7 @@ function Signup() {
 
 	const checkPassword = () => {
 		if (password !== confirmPassword) {
-			setError("password doesn't match");
+			setError("Las contraseñas no coinciden");
 			return false;
 		} else {
 			return true;

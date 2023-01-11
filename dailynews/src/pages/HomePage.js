@@ -64,8 +64,12 @@ const HomePage = () => {
 			</div>
 
 			{user ? (
-				<>
-					<ButtonAddNews showForm={showForm} setShowForm={setShowForm} />
+				<div className="is-centered">
+					<ButtonAddNews
+						className="is-centered"
+						showForm={showForm}
+						setShowForm={setShowForm}
+					/>
 					<ModalCreateNew showForm={showForm} setShowForm={setShowForm}>
 						<CreateNew
 							showForm={showForm}
@@ -73,7 +77,7 @@ const HomePage = () => {
 							addNewElement={addNewElement}
 						/>
 					</ModalCreateNew>
-				</>
+				</div>
 			) : null}
 
 			<NewsList

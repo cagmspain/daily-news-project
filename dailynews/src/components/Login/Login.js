@@ -28,8 +28,8 @@ function Login() {
 		});
 		const data = await res.json();
 		if (!res.ok) {
-			setError(error.message);
-			alert("usuario o contraseña invalidos");
+			setError(data.message);
+			//alert("usuario o contraseña invalidos");
 		} else {
 			setUser(data);
 			setShow(!show);
@@ -72,6 +72,7 @@ function Login() {
 						</div>
 					</label>
 				</div>
+				{error ? <p>{error}</p> : null}
 				<div className="field">
 					<div className="control">
 						<button className="button is-link is-fullwidth" type="submit">
@@ -79,8 +80,6 @@ function Login() {
 						</button>
 					</div>
 				</div>
-
-				{error ? <p>{error}</p> : null}
 			</form>
 			<p>Todavía no tienes cuenta?</p>
 			<div className="field">

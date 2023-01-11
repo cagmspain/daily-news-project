@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NewElement } from "../components/News/NewElement";
+
 import { getAllNewsService } from "../services";
 
 const useNews = () => {
@@ -31,7 +31,7 @@ const useNews = () => {
 
 	//delete from state after succesfull request
 	const deleteNewElement = (id) => {
-		console.log(news);
+		//console.log(news);
 		setNews(news.filter((NewElement) => NewElement.id !== id));
 	};
 
